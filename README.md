@@ -1,6 +1,6 @@
 # tweetharvest
 
-`tweetharvest` is a Python utility to monitor Twitter conversations around a small set of hashtags, and to store statuses (tweets) in that stream to a MongoDB database. The intended use case: monitoring discussions around a given event or campaign for later analysis using any tools that can access MongoDB.
+`tweetharvest` is a Python utility to monitor Twitter conversations around a small set of hashtags, and to store statuses (tweets) from that stream to a MongoDB database. The intended use case: collecting tweets from discussions around a given event or campaign, and storing them locally for later analysis. `tweetharvest` does not contain any analytic functions; it [does one thing well](http://en.wikipedia.org/wiki/Unix_philosophy#Do_One_Thing_and_Do_It_Well): data collection from the Twitter API.
 
 ## Setting Up
 
@@ -39,6 +39,8 @@ In order to start storing statuses, we need to start up the MongoDB server:
     $ mongod --dbpath .
 
 MongoDB starts up, reserves disk space, and creates blank journal files, all ready to start receiving tweets for storage.
+
+**Note**: if at any time you want to stop the MongoDB server, go to the console window where it is running and press `Control-C`.
 
 Leave the MongoDB server running in this window and open a new terminal/console window. `cd` to the tweetharvest directory:
 
@@ -150,4 +152,8 @@ At this stage the console reports that `tweetharvest` is merrily downloading emo
 - We may decide to stop the harvest. This can be done by pressing `Control-C` at any time and Python will exit the harvest. One reason we may want to stop is that we start to see that we are getting no fresh tweets for every set that we are downloading (for instance, we start to see `0 / 100 #happy` repeatedly in the output). It may be good practice to stop harvesting and return to it later. Generally Twitter will let us access the tweets from the past two weeks so we may want to run our harvest for a couple of hours every day and this will usually be sufficient for a complete collection.
 - We may notice that the program has stopped with an error report. There is no effort to compensate for these in the program, as there are many errors possible (Twitter may temporarily be down, your network is temprarily down, etc). It is a design decision to allow these to crash the program, giving a natural break. The harvest can simply be restarted by hand at a convenient time.
 
-After a few hours, we will have accumulated an extensive collection of tweets in the Mongo database. They will be located inside a database called `tweets_db`, in a collection named `emotweets` (or whatever is our `projectname`). We can now analyse the data using any tools we prefer.
+## Kick-Starting Your Analysis
+
+After a few hours, we will have accumulated an extensive collection of tweets in the Mongo database. They will be located inside a database called `tweets_db`, in a collection named `emotweets` (or whatever is our `projectname`). We can now analyze the data using any tools we prefer.
+
+As an aid to kick-starting your analysis, an example IPython notebook (called `example.ipynb`) can be found in this repository and can also be viewed online.

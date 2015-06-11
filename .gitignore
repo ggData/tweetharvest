@@ -3,7 +3,10 @@ twit_auth_app
 
 data/*
 !data/README.md
+
 log_*
+
+.ipynb*
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
