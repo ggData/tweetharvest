@@ -2,7 +2,7 @@
 
 ## Description
 
-`tweetharvest` is a Python utility to monitor Twitter conversations around a small set of hashtags, and to store statuses (tweets) in that stream to a MongoDB database. The intended use case: monitoring discussions around a given event or campaign for later analysis using any tools that can access MongoDB. An example is given of simple analysis using an IPython notebook.
+`tweetharvest` is a Python utility to monitor Twitter conversations around a small set of hashtags, and to store statuses (tweets) in that stream to a MongoDB database. The intended use case: monitoring discussions around a given event or campaign for later analysis using any tools that can access MongoDB.
 
 ## Setting Up
 
