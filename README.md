@@ -29,16 +29,18 @@ After unpacking the zip archive or cloning, `cd` into the `tweetharvest` directo
 
     $ cd tweetharvest
 
-### Install MongoDB and Start the Server
+### Install MongoDB
 
 Download the appropriate [MongoDB installer](https://www.mongodb.org/downloads) for your system and follow the instructions to set it up on Linux (installation instructions vary by distro; see [the relevant download page](https://www.mongodb.org/downloads#linux-new)), [Windows](http://docs.mongodb.org/manual/tutorial/install-mongodb-on-windows/?_ga=1.167442750.1237211192.1434015304), or [Mac OSX](http://docs.mongodb.org/manual/tutorial/install-mongodb-on-os-x/?_ga=1.259119114.1237211192.1434015304).
+
+### Start the MongoDB Server
 
 In order to start storing statuses, we need to start up the MongoDB server:
 
     $ cd data
     $ mongod --dbpath .
 
-MongoDB starts up the server, reserves disk space, and creates blank journal files, all ready to start receiving tweets for storage.
+MongoDB starts up, reserves disk space, and creates blank journal files, all ready to start receiving tweets for storage.
 
 Leave the MongoDB server running in this window and open a new terminal/console window. `cd` to the tweetharvest directory:
 
@@ -110,4 +112,44 @@ Hopefully you will have been successful and now have authorized your harvester t
 
 ### Selection of hashtags to be monitored
 
+We now come to the heart of the process. We have a MongoDB server running and ready to receive tweets. We have an app that has been authorized to collect statuses from the Twitter API. All we need is to select what we want to monitor. This is best illustrated by example. Let us imagine we are interested in monitoring expressions of two emotions and we decide to monitor two hashtags: `#happy` and `#sad`. We shall call our project `emotweets`. This is all we need to configure our app:
+
+1. Create a file called `tags_emotweets.txt` in the tweetharvest root folder, beside `main.py`. (Note: for any project called `projectname`, our program expects to find a file called `tags_projectname.txt` in the root folder).
+2. We insert each of the hashtags that we want to monitor on a separate line in this file. An example file is provided as a template. (In the example project, we insert the words `happy` and `sad` onto two lines and save the file).
+
+This is all we need to run the `emotweets` harvest! In the case of this example, the `tags_emotweets.txt` configuration file is provided as a model for your own projects. There should be one such `tags_xxx.txt` file per project. Please also note that you can only monitor one project at a time (more on that later).
+
 ### Running a harvest session
+
+It is assumed that you have MongoDB running in the background. If you have done this setup process in one session, it should still be running. If not, then go to the section 'Start the MongoDB Server' above and start it up...
+
+Navigate to the root directory again and run the `main.py` script, giving it the project name as an argument:
+
+    $ cd path/to/tweetharvest
+    $ python main.py emotweets
+
+If successful, you should now start getting outputs of this sort:
+
+    sad -1
+    happy -1
+    100 / 100 #sad
+    100 / 100 #happy
+    100 / 100 #sad
+    100 / 100 #happy
+    99 / 100 #sad
+    96 / 100 #happy
+
+These lines appear with a delay of about 3 seconds between one and the other, thus ensuring that we stay within Twitter's rate-limiting policies. The lines tell us that:
+
+- the program is working and actively collecting tweets
+- the initial lines report the hashtags that we are monitoring and the id of the most recent tweet for that hashtag in our database. If there are no tweets yet, we get `-1`, as in this instance.
+- every few seconds, our programme retrieves up to 100 tweets from Twitter for a given hashtag. It reports how many of these tweets are new in our database. The last line in our example output says that we retrieved 100 tweets with the hash `#happy` but only 96 of them were new.
+
+### Stopping and Starting
+
+At this stage the console reports that `tweetharvest` is merrily downloading emotional tweets for us. Eventually a number of things may happen:
+
+- We may decide to stop the harvest. This can be done by pressing `Control-C` at any time and Python will exit the harvest. One reason we may want to stop is that we start to see that we are getting no fresh tweets for every set that we are downloading (for instance, we start to see `0 / 100 #happy` repeatedly in the output). It may be good practice to stop harvesting and return to it later. Generally Twitter will let us access the tweets from the past two weeks so we may want to run our harvest for a couple of hours every day and this will usually be sufficient for a complete collection.
+- We may notice that the program has stopped with an error report. There is no effort to compensate for these in the program, as there are many errors possible (Twitter may temporarily be down, your network is temprarily down, etc). It is a design decision to allow these to crash the program, giving a natural break. The harvest can simply be restarted by hand at a convenient time.
+
+After a few hours, we will have accumulated an extensive collection of tweets in the Mongo database. They will be located inside a database called `tweets_db`, in a collection named `emotweets` (or whatever is our `projectname`). We can now analyse the data using any tools we prefer.
