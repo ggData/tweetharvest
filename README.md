@@ -8,14 +8,21 @@ The program has been developed on Python 2.7 on Mac OSX. It has run successfully
 
 The setup process assumes Python 2.7 is installed on the system you are using. Further installation requires:
 
-1. Cloning this repository
-2. Installation of MongoDB and starting the MongoDB server
-3. Installation of selected Python libraries
-4. Creation of a Twitter App and authorisation of the App on the harvesting machine
-5. Selection of hashtags to be monitored
-6. Running a harvest session
+1. Installation of MongoDB
+2. Cloning this repository
+3. Starting up the MongoDB server
+4. Installation of selected Python libraries
+5. Creation of a Twitter App and authorisation of the App on the harvesting machine
+6. Selection of hashtags to be monitored
+7. Running a harvest session
 
 These steps will be described in detail.
+
+### Install MongoDB
+
+Download the appropriate [MongoDB installer](https://www.mongodb.org/downloads) for your system and follow the instructions to set it up on Linux (installation instructions vary by distro; see [the relevant download page](https://www.mongodb.org/downloads#linux-new)), [Windows](http://docs.mongodb.org/manual/tutorial/install-mongodb-on-windows/?_ga=1.167442750.1237211192.1434015304), or [Mac OSX](http://docs.mongodb.org/manual/tutorial/install-mongodb-on-os-x/?_ga=1.259119114.1237211192.1434015304).
+
+**Note**: Do _not_ start up the server just yet, even if that is part of the installation instructions.
 
 ### Clone this repository
 
@@ -27,16 +34,11 @@ After unpacking the zip archive or cloning, `cd` into the `tweetharvest` directo
 
     $ cd tweetharvest
 
-### Install MongoDB
-
-Download the appropriate [MongoDB installer](https://www.mongodb.org/downloads) for your system and follow the instructions to set it up on Linux (installation instructions vary by distro; see [the relevant download page](https://www.mongodb.org/downloads#linux-new)), [Windows](http://docs.mongodb.org/manual/tutorial/install-mongodb-on-windows/?_ga=1.167442750.1237211192.1434015304), or [Mac OSX](http://docs.mongodb.org/manual/tutorial/install-mongodb-on-os-x/?_ga=1.259119114.1237211192.1434015304).
-
 ### Start the MongoDB Server
 
-In order to start storing statuses, we need to start up the MongoDB server:
+In order to start storing statuses, we now start up the MongoDB server, serving data out of the `data` directory in the `tweetharvest` root:
 
-    $ cd data
-    $ mongod --dbpath .
+    $ mongod --dbpath ./data
 
 MongoDB starts up, reserves disk space, and creates blank journal files, all ready to start receiving tweets for storage.
 
