@@ -1,4 +1,4 @@
-# README
+# `tweetharvest`
 
 ## Description
 
@@ -93,7 +93,7 @@ Make sure you preserve the quotes when you past your tokens. The end result shou
 
 #### Check Authorization is Working
 
-You now need to check that this the authorization is working. Navigate back to the root folder and run the `auth.py` script:
+You now need to check that the authorization is working. Navigate back to the root folder and run the `auth.py` script:
 
     $ cd path/to/tweetharvest
     $ python auth.py
