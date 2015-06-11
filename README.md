@@ -46,11 +46,11 @@ The harvest program requires two external Python packages, which now need to be 
 
 - It uses [Delorean](https://pypi.python.org/pypi/Delorean/0.4.5), "library for manipulating datetimes with ease and clarity". The [installation instructions](http://delorean.readthedocs.org/en/latest/install.html) in most cases reduces to a simple:
 
-    $ pip install delorean
+    `$ pip install delorean`
 
 - [PyMongo](http://api.mongodb.org/python/current/) "is a Python distribution containing tools for working with MongoDB, and is the recommended way to work with MongoDB from Python". Installation [instructions are provided], but again in most cases, all we need is:
 
-    $ pip install pymongo
+    `$ pip install pymongo`
 
 ### Creation of a Twitter App
 
