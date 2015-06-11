@@ -21,12 +21,17 @@ These steps will be described in detail.
 
 ### Clone this repository
 
-You can download this repository as a zip file or clone it to a local directory then `cd` into the directory:
+You can download this repository as a [zip file](https://github.com/ggData/tweetharvest/archive/master.zip) or clone it:
 
     $ git clone https://github.com/ggData/tweetharvest
+
+After unpacking the zip archive or cloning, `cd` into the `tweetharvest` directory:
+
     $ cd tweetharvest
 
 ### Install MongoDB and Start the Server
+
+Download the appropriate [MongoDB installer](https://www.mongodb.org/downloads) for your system and follow the instructions to set it up on Linux (installation instructions vary by distro; see [the relevant download page](https://www.mongodb.org/downloads#linux-new)), [Windows](http://docs.mongodb.org/manual/tutorial/install-mongodb-on-windows/?_ga=1.167442750.1237211192.1434015304), or [Mac OSX](http://docs.mongodb.org/manual/tutorial/install-mongodb-on-os-x/?_ga=1.259119114.1237211192.1434015304).
 
 ### Installation of Python Packages
 
