@@ -156,4 +156,4 @@ At this stage the console reports that `tweetharvest` is merrily downloading emo
 
 After a few hours, we will have accumulated an extensive collection of tweets in the Mongo database. They will be located inside a database called `tweets_db`, in a collection named `emotweets` (or whatever is our `projectname`). We can now analyze the data using any tools we prefer.
 
-As an aid to kick-starting your analysis, an example IPython notebook (called `example.ipynb`) can be found in this repository and can also be viewed online.
+As an aid to kick-starting your analysis, an [example IPython notebook](https://github.com/ggData/tweetharvest/blob/master/example.ipynb) (called appropriately `example.ipynb`) can be found in this repository and can also be [viewed here](http://nbviewer.ipython.org/github/ggData/tweetharvest/blob/master/example.ipynb).
