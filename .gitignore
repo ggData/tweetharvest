@@ -1,6 +1,9 @@
 twitconfig.py
 twit_auth_app
 
+data/*
+!data/README.md
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
