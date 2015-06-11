@@ -33,7 +33,24 @@ After unpacking the zip archive or cloning, `cd` into the `tweetharvest` directo
 
 Download the appropriate [MongoDB installer](https://www.mongodb.org/downloads) for your system and follow the instructions to set it up on Linux (installation instructions vary by distro; see [the relevant download page](https://www.mongodb.org/downloads#linux-new)), [Windows](http://docs.mongodb.org/manual/tutorial/install-mongodb-on-windows/?_ga=1.167442750.1237211192.1434015304), or [Mac OSX](http://docs.mongodb.org/manual/tutorial/install-mongodb-on-os-x/?_ga=1.259119114.1237211192.1434015304).
 
+In order to start storing statuses, we need to start up the MongoDB server:
+
+    $ cd data
+    $ mongod --dbpath .
+
+MongoDB starts up the server, reserves disk space, and creates blank journal files, all ready to start receiving tweets for storage.
+
 ### Installation of Python Packages
+
+The harvest program requires two external Python packages, which now need to be installed.
+
+- It uses [Delorean](https://pypi.python.org/pypi/Delorean/0.4.5), "library for manipulating datetimes with ease and clarity". The [installation instructions](http://delorean.readthedocs.org/en/latest/install.html) in most cases reduces to a simple:
+
+    $ pip install delorean
+
+- [PyMongo](http://api.mongodb.org/python/current/) "is a Python distribution containing tools for working with MongoDB, and is the recommended way to work with MongoDB from Python". Installation [instructions are provided], but again in most cases, all we need is:
+
+    $ pip install pymongo
 
 ### Creation of a Twitter App
 
