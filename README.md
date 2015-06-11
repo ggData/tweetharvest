@@ -66,10 +66,10 @@ The harvest program requires three external Python packages, which now need to b
 
 In order to harvest statuses from the Twitter stream, you need to have a Twitter account and to create a "Twitter App". Both are free and easy to create.
 
-1. You probably already have a Twitter acccount. If not, head over to the [home page](https://twitter.com/) and sign up.
-2. **Create an app**: Head over to the [application management dashboard](https://apps.twitter.com/) and hit the `Create New App` button.
+1. **Sign in to Twitter**: You probably already have a Twitter acccount. If not, head over to the [home page](https://twitter.com/) and sign up.
+2. **Create an app**: Now go to the [application management dashboard](https://apps.twitter.com/) and hit the `Create New App` button.
 
-When creating an app, provide the app **name** (e.g. 'Happy Harvester'), **description** (e.g. 'An app to collect tweets with the emotional hashtags like #happy'), and *website** (if you do not have a website, you may have a placeholder such as `http://www.example.com` and update this later when you do set up a website). Do not fill in the **Callback URL** field. Don't forget to check the box `Yes, I agree` below the Developer Agreement, and click the button to `Create your Twitter application`.
+When creating an app, provide the app **name** (e.g. 'Happy Harvester'), **description** (e.g. 'An app to collect tweets with the emotional hashtags like #happy'), and **website** (if you do not have a website, you may have a placeholder such as `http://www.example.com` and update this later when you do set up a website). Do not fill in the **Callback URL** field. Accept the Developer Agreement, and click the button to `Create your Twitter application`.
 
 ### Authorisation of the App
 
@@ -112,12 +112,14 @@ Hopefully you will have been successful and now have authorized your harvester t
 
 ### Selection of hashtags to be monitored
 
-We now come to the heart of the process. We have a MongoDB server running and ready to receive tweets. We have an app that has been authorized to collect statuses from the Twitter API. All we need is to select what we want to monitor. This is best illustrated by example. Let us imagine we are interested in monitoring expressions of two emotions and we decide to monitor two hashtags: `#happy` and `#sad`. We shall call our project `emotweets`. This is all we need to configure our app:
+By now, we have a MongoDB server running and ready to receive tweets. We have an app that has been authorized to collect statuses from the Twitter API. All we need is to select what hashtags we want to monitor.
+
+This part of the process is best illustrated by example. Let us imagine we are interested in monitoring expressions of two emotions and we decide to monitor two hashtags: `#happy` and `#sad`. We shall call our project `emotweets`. This information is all we need to configure our app:
 
 1. Create a file called `tags_emotweets.txt` in the tweetharvest root folder, beside `main.py`. (Note: for any project called `projectname`, our program expects to find a file called `tags_projectname.txt` in the root folder).
 2. We insert each of the hashtags that we want to monitor on a separate line in this file. An example file is provided as a template. (In the example project, we insert the words `happy` and `sad` onto two lines and save the file).
 
-This is all we need to run the `emotweets` harvest! In the case of this example, the `tags_emotweets.txt` configuration file is provided as a model for your own projects. There should be one such `tags_xxx.txt` file per project. Please also note that you can only monitor one project at a time (more on that later).
+This is all we need to run the `emotweets` harvest! In the case of this example, the `tags_emotweets.txt` configuration file is provided as a model for your own projects. There should be one such `tags_xxx.txt` file per project (where `xxx` stands for `projectname`). Please also note that you can only monitor one project at a time (one client per IP address as stipulated by Twitter API terms of service).
 
 ### Running a harvest session
 
@@ -145,6 +147,8 @@ These lines appear with a delay of about 3 seconds between one and the other, th
 - the initial lines report the hashtags that we are monitoring and the id of the most recent tweet for that hashtag in our database. If there are no tweets yet, we get `-1`, as in this instance.
 - every few seconds, our programme retrieves up to 100 tweets from Twitter for a given hashtag. It reports how many of these tweets are new in our database. The last line in our example output says that we retrieved 100 tweets with the hash `#happy` but only 96 of them were new.
 
+Inside the MongoDB datastore, a database has been created called `tweets_db` and our tweets are being stored there in a collection that bears the same name as the `projectname` we used as argument to `main.py`, in the case of this example, the collection is `emotweets`.
+
 ### Stopping and Starting
 
 At this stage the console reports that `tweetharvest` is merrily downloading emotional tweets for us. Eventually a number of things may happen:
@@ -158,4 +162,4 @@ After a few hours, we will have accumulated an extensive collection of tweets in
 
 As an aid to kick-starting your analysis, an [example IPython notebook](https://github.com/ggData/tweetharvest/blob/master/example.ipynb) (called appropriately `example.ipynb`) can be found in this repository and can also be [viewed here](http://nbviewer.ipython.org/github/ggData/tweetharvest/blob/master/example.ipynb).
 
-(**Note**: The data for the example notebook is not provided so you can read it but not run it immediately. If you desire to run it locally, you must first run the `emotweets` project using the provided tags file).
+**Note**: The data for the example notebook is not provided so you can read it but not run it immediately. If you desire to run it locally, you must first run the `emotweets` project using the provided tags file.
