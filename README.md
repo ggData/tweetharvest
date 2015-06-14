@@ -1,6 +1,6 @@
 # tweetharvest
 
-`tweetharvest` is a Python utility to monitor Twitter conversations around a small set of hashtags, and to store statuses (tweets) from that stream to a MongoDB database. The intended use case: collecting tweets from discussions around a given event or campaign, and storing them locally for later analysis. `tweetharvest` does not contain any analytic functions; it [does one thing well](http://en.wikipedia.org/wiki/Unix_philosophy#Do_One_Thing_and_Do_It_Well): data collection from the Twitter API.
+`tweetharvest` is a Python utility to monitor Twitter conversations around a small set of hashtags, and to store statuses (tweets) from that stream to a MongoDB database. The intended use case: collecting tweets from discussions around a given event or campaign, and storing them locally for later analysis. `tweetharvest` does not contain any analytic functions; it aims to [do one thing well](http://en.wikipedia.org/wiki/Unix_philosophy#Do_One_Thing_and_Do_It_Well): data collection from the Twitter API.
 
 ## Setting Up
 
@@ -81,11 +81,11 @@ You will now need to insert these credentials into the program. Navigate to the 
 
     $ cd path/to/tweetharvest/lib/secret
 
-Rename the file called `twitconfig.py.bak` to `twitconfig.py`:
+Copy the file called `twitconfig.py.bak` to `twitconfig.py`:
 
-    $  mv twitconfig.py.bak twitconfig.py
+    $  cp twitconfig.py.bak twitconfig.py
 
-Edit this file in a text editor and insert your consumer key and consumer secret in between the quotation marks on lines 6 and 7. They look like this when you first open the file:
+Edit `twitconfig.py` and insert your consumer key and consumer secret in between the quotation marks on lines 6 and 7. They look like this when you first open the file:
 
     CONSUMER_KEY = 'InsertYourConsumerKeyHere'
     CONSUMER_SECRET = 'InsertYourConsumerSecretHere'
