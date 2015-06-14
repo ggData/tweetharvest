@@ -8,11 +8,11 @@ import logging
 from pymongo import MongoClient
 from delorean import parse
 
-from lib.secret.twitconfig import T  # hide access keys
+from utils.secret.twitconfig import T  # hide access keys
 
 
 # provide project name as a command line argument
-# use lowercase ascii-only no-spaces 
+# use lowercase ascii-only no-spaces
 # (the program does not check for these yet -- so take care)
 try:
     PROJECT = sys.argv[1]

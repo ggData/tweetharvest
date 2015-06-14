@@ -1,7 +1,7 @@
 from twitter.api import TwitterHTTPError
 
 try:
-    from lib.secret.twitconfig import T
+    from utils.secret.twitconfig import T
     if T.domain == 'api.twitter.com':
         print 'App is authorised, congratulations!'
 except TwitterHTTPError, e:
